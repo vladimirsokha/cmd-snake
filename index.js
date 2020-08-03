@@ -33,3 +33,10 @@ for (let row = 0; row < WHeight; row++) {
   }
 }
 
+// World conners setup
+
+world[0][0] = WC; // Top Left cell
+world[WHeight - 1][0] = WC; // Bottom Left cell
+world[0][WWidth - 1] = WC; // Top Right cell
+world[WHeight - 1][WWidth - 1] = WC; // Bottom Right cell
+
