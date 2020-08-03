@@ -1,34 +1,35 @@
-"use strict"
-
 // Reading the input from the user that initiated the process.
+var process = require('process');
+var console = require('console');
+var setInterval = require('setInterval');
 
-let WWidth  = process.argv[2] || 30;
-let WHeight = process.argv[3] || 10;
+var WWidth  = process.argv[2] || 30;
+var WHeight = process.argv[3] || 10;
 
 // Some snake data
 
-let SHx = process.argv[4] || 4;   //Snake head X coordinate
-let SHy = process.argv[5] || 6;   //Snake head Y coordinate
-let Sl  = process.argv[6] || 3;   // Snake length in segments including the head
-let Sd  = process.argv[7] || 'S'; // Snake movement direction [N,S,E,W]
+var SHx = process.argv[4] || 4;   //Snake head X coordinate
+var SHy = process.argv[5] || 6;   //Snake head Y coordinate
+var Sl  = process.argv[6] || 3;   // Snake length in segments including the head
+var Sd  = process.argv[7] || 'S'; // Snake movement direction [N,S,E,W]
 
 // Constants defined that render the world.
 
-const WC = '+'; // world corner
-const WV = '|'; // world vertical wall (edge)
-const WH = '-'; // world horizontal wall (edge)
-const WS = ' '; // world space (a space character)
-const SH = 'O'; // snake head
-const SB = 'o'; // snake body
-const SF = '$'; // snake food
-const SC = '*'; // snake collision
+var WC = '+'; // world corner
+var WV = '|'; // world vertical wall (edge)
+var WH = '-'; // world horizontal wall (edge)
+var WS = ' '; // world space (a space character)
+var SH = 'O'; // snake head
+var SB = 'o'; // snake body
+var SF = '$'; // snake food
+var SC = '*'; // snake collision
 
 // Define the World
 
-let world = [];
-for (let row = 0; row < WHeight; row++) {
+var world = [];
+for (var row = 0; row < WHeight; row++) {
   world[row] = [];
-  for (let col = 0; col < WWidth; col++) {
+  for (var col = 0; col < WWidth; col++) {
     world[row][col] = WS;
   }
 }
@@ -41,20 +42,20 @@ world[0][WWidth - 1] = WC; // Top Right cell
 world[WHeight - 1][WWidth - 1] = WC; // Bottom Right cell
 
 // Set the world Vertical Walls (edges)
-for (let row = 1; row < WHeight - 1; row++) {
+for (var row = 1; row < WHeight - 1; row++) {
     world[row][0] = world[row][WWidth - 1] = WV;
 }
 // Set the world Horizontal Walls (edges)
-for (let col = 1; col < WWidth - 1; col++) {
+for (var col = 1; col < WWidth - 1; col++) {
     world[0][col] = world[WHeight - 1][col] = WH;
 }
 
-let snake = [[SHx, SHy]];
+var snake = [[SHx, SHy]];
 
-let Br = SHx;
-let Bc = SHy;
-let hasExceded = false;
-for (let body = 0; body < Sl; body++) {
+var Br = SHx;
+var Bc = SHy;
+var hasExceded = false;
+for (var body = 0; body < Sl; body++) {
   switch (Sd.toUpperCase()) {
     // Column movement
     case 'W':
@@ -80,8 +81,8 @@ for (let body = 0; body < Sl; body++) {
 }
 
 function _inSnake(r, c, snakeArray) {
-    for (let snakeSegmentIndex = 0; snakeSegmentIndex < snakeArray.length; snakeSegmentIndex++) {
-      let snakeSegmentCoordinates = snakeArray[snakeSegmentIndex];
+    for (var snakeSegmentIndex = 0; snakeSegmentIndex < snakeArray.length; snakeSegmentIndex++) {
+        var snakeSegmentCoordinates = snakeArray[snakeSegmentIndex];
       if (snakeSegmentCoordinates[0] === r && snakeSegmentCoordinates[1] === c) {
         return snakeSegmentIndex;
       }
@@ -92,10 +93,10 @@ function _inSnake(r, c, snakeArray) {
 // Matrix serialization
 
 function world2string(worldMatrix, snakeArray) {
-    let s = ""; // Accumulator|Aggregator
-    for (let row = 0; row < worldMatrix.length; row++) {
-      for (let col = 0; col < worldMatrix[row].length; col++) {
-        let snakeSegmentIndex = _inSnake(row, col, snakeArray);
+    var s = ""; // Accumulator|Aggregator
+    for (var row = 0; row < worldMatrix.length; row++) {
+      for (var col = 0; col < worldMatrix[row].length; col++) {
+        var snakeSegmentIndex = _inSnake(row, col, snakeArray);
         if (snakeSegmentIndex < 0 || worldMatrix[row][col] === SC) {
           s += worldMatrix[row][col];
         } else {
@@ -123,7 +124,7 @@ function drawWorld(worldMatrix, snakeArray) {
 
 function snakeMovement(snake, direction) {
     direction = direction || Sd;
-    let head  = snake[0];
+    var head  = snake[0];
     switch (direction.toUpperCase()) {
       // Column movement
       case 'N':
@@ -196,7 +197,7 @@ drawWorld(world, snake);
 
 
 // Reading CLI input
-const readline = require('readline');
+var readline = require('readline');
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 process.stdin.on('keypress', function (s, key) {

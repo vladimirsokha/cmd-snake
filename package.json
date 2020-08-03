@@ -4,7 +4,7 @@
   "description": "Command line snake game",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "jshint index.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/vladimirsokha/cmd-snake/issues"
   },
-  "homepage": "https://github.com/vladimirsokha/cmd-snake#readme"
+  "homepage": "https://github.com/vladimirsokha/cmd-snake#readme",
+  "devDependencies": {
+    "jshint": "^2.11.2"
+  }
 }
