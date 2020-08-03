@@ -166,3 +166,26 @@ function snakeMovement(snake, direction) {
       process.exit(0);
     }
 }
+
+function isTheFieldEmpty(r, c) {
+    return world[r][c] === WS;
+}
+  
+function isFood(r, c) {
+    return world[r][c] === SF;
+}
+  
+function getRandomNumber(min, max) {
+    // Nice copy-paste, except that max is not the maximum but the supremum
+    return Math.floor(Math.random() * (max - min) + min);
+}
+  
+function spawnFood(r, c) {
+    if (!r || !c) {
+      do {
+        r = getRandomNumber(1, WHeight - 2);
+        c = getRandomNumber(1, WWidth - 2);
+      } while (isTheFieldEmpty(r, c) && !_inSnake(r, c, snake));
+    } // TODO: Verify that the input is sane (0<r<H-1 && 0<c<W-1)
+    world[r][c] = SF;
+}
