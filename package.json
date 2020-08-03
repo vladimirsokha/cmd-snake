@@ -1,0 +1,26 @@
+{
+  "name": "cmd-snake",
+  "version": "1.0.0",
+  "description": "Command line snake game",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladimirsokha/cmd-snake.git"
+  },
+  "keywords": [
+    "Node.js",
+    "snake",
+    "cmd",
+    "command",
+    "game"
+  ],
+  "author": "Vladimir Sokha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vladimirsokha/cmd-snake/issues"
+  },
+  "homepage": "https://github.com/vladimirsokha/cmd-snake#readme"
+}
