@@ -152,7 +152,7 @@ function snakeMovement(snake, direction) {
       } else {
         world[SHx][SHy] = SC;
         drawWorld(world, snake);
-        //console.log('Game Over! The snake had hit itself in the body!');
+        console.log('Game Over! The snake had hit itself in the body!');
         process.exit(0);
       }
     } else if (isFood(SHx, SHy)) {
@@ -162,7 +162,7 @@ function snakeMovement(snake, direction) {
     } else {
       world[SHx][SHy] = SC;
       drawWorld(world, snake);
-      //console.log('Game Over! The snake had hit a wall!');
+      console.log('Game Over! The snake had hit a wall!');
       process.exit(0);
     }
 }
@@ -196,8 +196,8 @@ drawWorld(world, snake);
 
 
 // Reading CLI input
-import { emitKeypressEvents } from 'readline';
-emitKeypressEvents(process.stdin);
+const readline = require('readline');
+readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 process.stdin.on('keypress', function (s, key) {
   switch (key.name) {
