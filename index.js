@@ -152,7 +152,7 @@ function snakeMovement(snake, direction) {
       } else {
         world[SHx][SHy] = SC;
         drawWorld(world, snake);
-        console.log('Game Over! The snake had hit itself in the body!');
+        //console.log('Game Over! The snake had hit itself in the body!');
         process.exit(0);
       }
     } else if (isFood(SHx, SHy)) {
@@ -162,7 +162,7 @@ function snakeMovement(snake, direction) {
     } else {
       world[SHx][SHy] = SC;
       drawWorld(world, snake);
-      console.log('Game Over! The snake had hit a wall!');
+      //console.log('Game Over! The snake had hit a wall!');
       process.exit(0);
     }
 }
@@ -189,3 +189,39 @@ function spawnFood(r, c) {
     } // TODO: Verify that the input is sane (0<r<H-1 && 0<c<W-1)
     world[r][c] = SF;
 }
+
+//Start the game
+spawnFood(4, 5);
+drawWorld(world, snake);
+
+
+// Reading CLI input
+import { emitKeypressEvents } from 'readline';
+emitKeypressEvents(process.stdin);
+process.stdin.setRawMode(true);
+process.stdin.on('keypress', function (s, key) {
+  switch (key.name) {
+    case "up":
+      Sd = 'N';
+      break;
+    case "down":
+      Sd = 'S';
+      break;
+    case "left":
+      Sd = 'W';
+      break;
+    case "right":
+      Sd = 'E';
+      break;
+    case "c": // CTRL+C exit the game
+      if (key.ctrl) {
+        process.exit();
+      }
+      break;
+  }
+});
+
+setInterval(function () {
+  snakeMovement(snake);
+  drawWorld(world, snake);
+}, 200);
