@@ -40,3 +40,11 @@ world[WHeight - 1][0] = WC; // Bottom Left cell
 world[0][WWidth - 1] = WC; // Top Right cell
 world[WHeight - 1][WWidth - 1] = WC; // Bottom Right cell
 
+// Set the world Vertical Walls (edges)
+for (let row = 1; row < WHeight - 1; row++) {
+    world[row][0] = world[row][WWidth - 1] = WV;
+}
+// Set the world Horizontal Walls (edges)
+for (let col = 1; col < WWidth - 1; col++) {
+    world[0][col] = world[WHeight - 1][col] = WH;
+}
