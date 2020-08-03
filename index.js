@@ -110,3 +110,59 @@ function world2string(worldMatrix, snakeArray) {
     }
     return s;
 }
+
+// Drawing the world
+
+function drawWorld(worldMatrix, snakeArray) {
+    if (hasExceded) {
+      console.warn('Snake body exceeded world');
+    }
+    process.stdout.write('\x1Bc');
+    process.stdout.write(world2string(worldMatrix, snakeArray));
+}
+
+function snakeMovement(snake, direction) {
+    direction = direction || Sd;
+    let head  = snake[0];
+    switch (direction.toUpperCase()) {
+      // Column movement
+      case 'N':
+        SHx = head[0] - 1;
+        SHy = head[1];
+        break;
+      case 'S':
+        SHx = head[0] + 1;
+        SHy = head[1];
+        break;
+      // Row movement
+      case 'W':
+        SHx = head[0];
+        SHy = head[1] - 1;
+        break;
+      case 'E':
+        SHx = head[0];
+        SHy = head[1] + 1;
+        break;
+    }
+    // if is NOT valid (SHx, SHy) Game over
+    if (isTheFieldEmpty(SHx, SHy)) {
+      if (_inSnake(SHx, SHy, snake) < 0) {
+        snake.unshift([SHx, SHy]);
+        snake.pop();
+      } else {
+        world[SHx][SHy] = SC;
+        drawWorld(world, snake);
+        console.log('Game Over! The snake had hit itself in the body!');
+        process.exit(0);
+      }
+    } else if (isFood(SHx, SHy)) {
+      world[SHx][SHy] = WS;
+      snake.unshift([SHx, SHy]);
+      spawnFood();
+    } else {
+      world[SHx][SHy] = SC;
+      drawWorld(world, snake);
+      console.log('Game Over! The snake had hit a wall!');
+      process.exit(0);
+    }
+}
