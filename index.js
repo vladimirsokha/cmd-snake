@@ -5,6 +5,13 @@
 let WWidth  = process.argv[2] || 30;
 let WHeight = process.argv[3] || 10;
 
+// Some snake data
+
+let SHx = process.argv[4] || 4;   //Snake head X coordinate
+let SHy = process.argv[5] || 6;   //Snake head Y coordinate
+let Sl  = process.argv[6] || 3;   // Snake length in segments including the head
+let Sd  = process.argv[7] || 'S'; // Snake movement direction [N,S,E,W]
+
 // Constants defined that render the world.
 
 const WC = '+'; // world corner
@@ -25,3 +32,4 @@ for (let row = 0; row < WHeight; row++) {
     world[row][col] = WS;
   }
 }
+
