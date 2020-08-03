@@ -78,3 +78,35 @@ for (let body = 0; body < Sl; body++) {
     break;
   }
 }
+
+function _inSnake(r, c, snakeArray) {
+    for (let snakeSegmentIndex = 0; snakeSegmentIndex < snakeArray.length; snakeSegmentIndex++) {
+      let snakeSegmentCoordinates = snakeArray[snakeSegmentIndex];
+      if (snakeSegmentCoordinates[0] === r && snakeSegmentCoordinates[1] === c) {
+        return snakeSegmentIndex;
+      }
+    }
+    return -1;
+}
+
+// Matrix serialization
+
+function world2string(worldMatrix, snakeArray) {
+    let s = ""; // Accumulator|Aggregator
+    for (let row = 0; row < worldMatrix.length; row++) {
+      for (let col = 0; col < worldMatrix[row].length; col++) {
+        let snakeSegmentIndex = _inSnake(row, col, snakeArray);
+        if (snakeSegmentIndex < 0 || worldMatrix[row][col] === SC) {
+          s += worldMatrix[row][col];
+        } else {
+          if (snakeSegmentIndex === 0) {
+            s += SH;
+          } else {
+            s += SB;
+          }
+        }
+      }
+      s += '\n';
+    }
+    return s;
+}
