@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/vladimirsokha/cmd-snake.svg?branch=master)](https://travis-ci.org/vladimirsokha/cmd-snake)
+
 # cmd-snake
 Command line snake game
 
