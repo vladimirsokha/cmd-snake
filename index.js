@@ -48,3 +48,33 @@ for (let row = 1; row < WHeight - 1; row++) {
 for (let col = 1; col < WWidth - 1; col++) {
     world[0][col] = world[WHeight - 1][col] = WH;
 }
+
+let snake = [[SHx, SHy]];
+
+let Br = SHx;
+let Bc = SHy;
+let hasExceded = false;
+for (let body = 0; body < Sl; body++) {
+  switch (Sd.toUpperCase()) {
+    // Column movement
+    case 'W':
+      Bc--;
+      break;
+    case 'E':
+      Bc++;
+      break;
+    // Row movement
+    case 'N':
+      Br++;
+      break;
+    case 'S':
+      Br--;
+      break;
+  }
+  if ((0 < Br) && (Br < WHeight - 1) && (0 < Bc) && (Bc < WWidth - 1)) {
+    snake.push([Br, Bc]);
+  } else {
+    hasExceded = true;
+    break;
+  }
+}
