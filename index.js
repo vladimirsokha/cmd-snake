@@ -1,7 +1,7 @@
 // Reading the input from the user that initiated the process.
 var process = require('process');
 var console = require('console');
-var setInterval = require('setInterval');
+//var setInterval = require('setInterval');
 
 var WWidth  = process.argv[2] || 30;
 var WHeight = process.argv[3] || 10;
